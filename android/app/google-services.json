@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "465654460816",
+    "project_id": "hotel-booking-react-d02c3",
+    "storage_bucket": "hotel-booking-react-d02c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465654460816:android:750922d2ffc2c8c7468315",
+        "android_client_info": {
+          "package_name": "com.deviresidencies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465654460816-fkq4faal5s1n6o7pa47fdpu87pt2geec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWnSLlK-PgT4SK58PNel-3f-vVmJUy6wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465654460816-fkq4faal5s1n6o7pa47fdpu87pt2geec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
