@@ -8,7 +8,7 @@ import { orderBookingInfo, SelectUserSignIn } from './Redux/Redux_Slice';
 import firestore from '@react-native-firebase/firestore';
 
 
-const Tables = ({name, active, bookedby, survedby, id, index,bookerid, bookeremail,navigation}) => {
+const Tables = ({name, active, bookedby, survedby, id, index,bookerid, bookeremail,navigation,length}) => {
  
    const [orderMoreOptions, setorderMoreOptions] = useState(false)
    let selectUserSignIn=useSelector(SelectUserSignIn)
@@ -193,7 +193,9 @@ let onclickingOrders=()=>{
 
   return (
     <View
-    style={styles.tables }
+    style={[styles.tables,
+      {marginBottom:length===index+1? 225:0}
+    ] }
     >
      <View style={styles.tablesTopPart} >
      

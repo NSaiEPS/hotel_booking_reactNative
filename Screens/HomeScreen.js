@@ -249,7 +249,7 @@ return (
 
             <Tables name={item.data.name} active={item.data.active} bookedby={item.data.bookedby}
 survedby={item.data.survedby} id={item.id} index={index} bookerid={item.data.bookeduserid}
-bookeremail={item.data.bookeremail}  navigation={navigation} />
+bookeremail={item.data.bookeremail}  navigation={navigation} length={tables.length}/>
             </View>
 
 
