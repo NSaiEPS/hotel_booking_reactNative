@@ -1,11 +1,11 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { Appearance, Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 // import { Image } from 'react-native-elements'
 import FuaturedItems from '../Components/FuaturedItems'
 import Tables from '../Components/Tables'
 import { db } from '../Firebase'
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import Icon from 'react-native-vector-icons/Fontisto';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Button, Input ,Image} from 'react-native-elements'
 import Header from '../Components/Header'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,6 +19,11 @@ const HomeScreen = ({navigation}) => {
   // const [headerMoreInfo, setheaderMoreInfo] = useState(false)
   let dispatch=useDispatch()
   let selectUserSignIn=useSelector(SelectUserSignIn)
+  const colorScheme = Appearance.getColorScheme();
+
+
+let [phoneDarkModeCheck,setPhoneDarkModeCheck]=useState(false)
+
 
   // let selectAdminSignIn=useSelector(SelectAdminSignIn)
 
@@ -171,6 +176,17 @@ useEffect(()=>{
   //   })))
   // })
 
+  if (colorScheme === 'dark') {
+    setPhoneDarkModeCheck(true)
+    
+  }
+
+    
+    else {
+      setPhoneDarkModeCheck(false)
+  }
+ 
+
 },[])
 
 // IMp
@@ -229,16 +245,71 @@ useEffect(()=>{
 },[user])
 
 
+// const windowWidth = Dimensions.get('window')
+const {width, height} = Dimensions.get('window')
+console.log(width, height,'Home screen')
+
+
+// let find_dimesions=(layout)=>{
+//   const {x, y, width, height} = layout;
+//   console.log(x);
+//   console.log(y);
+//   console.log(width);
+//   console.log(height);
+// }
+
+const scrollRef = useRef();
+const [scrolToTopCheck, setscrolToTopCheck]=useState(false)
+
+
+const onPressTouch = () => {
+  
+  scrollRef.current?.scrollTo({
+    y: 0,
+    animated: true,
+  });
+
+  if(scrolToTopCheck){
+
+  }
+    else {
+  scrollRef.current?.scrollToEnd({ animated: true });}
+}
+
+
+
+let handleScroll=(e)=>{
+  let scrolYval=(e.nativeEvent.contentOffset.y)
+  
+  if(scrolYval>1500){
+    setscrolToTopCheck(true)
+  }
+  else {
+    setscrolToTopCheck(false)
+  }
+
+}
 
 return (
     <SafeAreaView>
       <Header  navigation={navigation}/>
+      <View style={[styles.ontouchScroll,{
+borderColor:phoneDarkModeCheck ?'red':'white' 
+      }]}   >
+        <TouchableOpacity onPress={onPressTouch}>
+        <Text style={{alignSelf:'center'}} >
+<Icon  name= {scrolToTopCheck ? 'angle-double-up': 'angle-double-down'} color='white'  size={35}/>
+        </Text>
+        </TouchableOpacity>
+
+      </View>
     <View
-    style={styles.homeScreen}
+    style={styles.homeScreen} 
+    // onLayout={(layout)=> find_dimesions(layout)}
     >
       <FuaturedItems/>
       {/* <Tables  navigation={navigation} /> */}
-      <ScrollView>
+      <ScrollView   ref={scrollRef} onScroll={handleScroll}>
         {
           tables.map((item,index)=>
           {
@@ -258,6 +329,7 @@ bookeremail={item.data.bookeremail}  navigation={navigation} length={tables.leng
           )})
         }
       </ScrollView>
+     
     </View>
     </SafeAreaView>
   )
@@ -272,5 +344,25 @@ const styles = StyleSheet.create({
     // backgroundColor: '#051b30' ,
     backgroundColor: '#102041' ,
     color:'white'
+  },
+
+  ontouchScroll:{
+    borderColor:'white',
+    borderWidth:3,
+    position:'absolute',
+    
+    bottom:100,
+    right:10,
+    backgroundColor:'#102041',
+    elevation:3,
+    zIndex:3,
+    width:70,
+    height:70,
+    borderRadius:40,
+    display:'flex',
+    // alignContent:'center',
+    justifyContent:'center',
+    // alignSelf:'center'
+
   }
 })

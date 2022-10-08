@@ -10,6 +10,7 @@ import TablesInfoScreen from './Screens/TablesInfoScreen';
 import AdminDashBoard from './Screens/AdminDashBoard';
 import { Provider } from 'react-redux';
 import { Store } from './Components/Redux/Store';
+import { Appearance } from 'react-native';
 
 enableScreens();
 
@@ -17,7 +18,11 @@ enableScreens();
 
 const Stack = createNativeStackNavigator();
 
-
+// const colorScheme = Appearance.getColorScheme();
+// if (colorScheme === 'dark') {
+//   // Use dark color scheme
+//   alert("dark mode on")
+// }
 
 const globalScreenOptions={
   headerStyle:{

@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import Header from '../Components/Header'
 import { useSelector } from 'react-redux'
@@ -11,6 +11,8 @@ import firestore from '@react-native-firebase/firestore';
 
 const TablesInfoScreen = ({navigation, route}) => {
   let selectOrderInfo=useSelector(SelectOrderInfo)
+  const windowWidth = Dimensions.get('window')
+console.log(windowWidth,'order screen')
 
   useLayoutEffect(()=>{
     navigation.setOptions({headerShown: false})
