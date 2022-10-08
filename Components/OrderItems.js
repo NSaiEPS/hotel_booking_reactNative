@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 
 
 
-const OrderItems = ({item}) => {
+const OrderItems = ({item,length,index}) => {
+    
     let selectOrderInfo=useSelector(SelectOrderInfo)
 
    const [orderInputs, setorderInputs] = useState({
@@ -64,7 +65,9 @@ const OrderItems = ({item}) => {
    }
   return (
 
-    <View style={styles.orderItems} >
+    <View style={[styles.orderItems,{
+        marginBottom: length===(index+1) ? 150:0
+    }]} >
        
        
         <View  style={styles.orderItemsInside}>
@@ -172,14 +175,14 @@ const OrderItems = ({item}) => {
              keyboardType='decimal-pad'
                value={orderInputs.price}
                onChangeText={(text)=>{
-                // if(true){
-                // alert("U can't edit the price, only the supplier can edit the price")}
-                // else{
+                if(true){
+                alert("U can't edit the price, only the supplier can edit the price")}
+                else{
                    setorderInputs({
                        ...orderInputs,
                        price:text
                    })
-                // }
+                }
    
                }}
             />

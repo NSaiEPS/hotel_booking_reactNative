@@ -57,7 +57,7 @@ const Orders = ({}) => {
               return(
               <View key={index} >
 
-<OrderItems  item={data}/>
+<OrderItems  item={data} length={(order.length)} index={index}/>
 
  </View>)
 
@@ -92,3 +92,4 @@ const styles = StyleSheet.create({
     }
 
 })
+
