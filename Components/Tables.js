@@ -1,5 +1,5 @@
-import { Alert, Image, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { Alert, Appearance, Image, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Entypo';
@@ -191,10 +191,38 @@ let onclickingOrders=()=>{
 
 }
 
+const colorScheme = Appearance.getColorScheme();
+
+
+let [phoneDarkModeCheck,setPhoneDarkModeCheck]=useState(false)
+
+let checkdarkMode=()=>{
+  // alert('called')
+
+}
+
+
+
+useEffect(()=>{
+  if (colorScheme === 'dark') {
+    setPhoneDarkModeCheck(true)
+    
+  }
+
+    
+    else {
+      setPhoneDarkModeCheck(false)
+  }
+
+ 
+},[(Appearance.addChangeListener)])
   return (
     <View
     style={[styles.tables,
-      {marginBottom:length===index+1? 225:0}
+      {marginBottom:length===index+1? 225:0,
+      
+        borderColor: phoneDarkModeCheck ?'red':'white'
+      }
     ] }
     >
      <View style={styles.tablesTopPart} >
