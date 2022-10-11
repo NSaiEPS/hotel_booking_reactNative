@@ -247,7 +247,7 @@ useEffect(()=>{
 
 // const windowWidth = Dimensions.get('window')
 const {width, height} = Dimensions.get('window')
-console.log(width, height,'Home screen')
+// console.log(width, height,'Home screen')
 
 
 // let find_dimesions=(layout)=>{
@@ -290,9 +290,19 @@ let handleScroll=(e)=>{
 
 }
 
+
+
 return (
     <SafeAreaView>
-      <Header  navigation={navigation}/>
+      <View
+      style={{
+        borderColor: phoneDarkModeCheck ?'red':'white',
+         borderWidth:1,
+         zIndex:1
+      }}
+      >
+      <Header  navigation={navigation}/></View>
+     
       <View style={[styles.ontouchScroll,{
 borderColor:phoneDarkModeCheck ?'red':'white' 
       }]}   >

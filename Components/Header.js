@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Appearance, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Fontisto';
 import { Button, Input ,Image} from 'react-native-elements'
@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 
 
-const Header = ({navigation}) => {
+  
+const Header = ({navigation,dashboard}) => {
     const [headerMoreInfo, setheaderMoreInfo] = useState(false)
   let selectAdminSignIn=useSelector(SelectAdminSignIn)
 
@@ -30,6 +31,11 @@ const Header = ({navigation}) => {
         navigation.replace("Login")
       })
   }
+//   const colorScheme = Appearance.getColorScheme();
+
+
+// let [phoneDarkModeCheck,setPhoneDarkModeCheck]=useState(false)
+
   return (
     <View
     style={{
@@ -38,19 +44,20 @@ const Header = ({navigation}) => {
         justifyContent:'space-between',
         alignContent:'space-around',
         alignItems:'center',
+        // borderColor:'red',
+        // borderWidth:1,
 
         width:'90%',
         marginLeft:'auto',
         marginRight:'auto',
         // backgroundColor:'white',
         height: 75,
+        zIndex:1
         // marginBottom: headerMoreInfo ? 25:0
     }}
     
     >
-        <View
-      
-        >
+        <View >
         <Image 
         source={{
             uri:"https://img.freepik.com/premium-vector/initial-dr-letter-logo-with-script-typography-vector-template-creative-script-letter-dr-logo-design_616200-715.jpg"
@@ -153,12 +160,19 @@ size={30} color="black" />
      {selectAdminSignIn &&
 
      <Button
-     title='DashBoard'
+     title={dashboard?'Back': 'DashBoard'}
      type='outline'
      onPress={()=>{
-        navigation.navigate("Admin")
+       
        setheaderMoreInfo(false)
-    }}
+       if(dashboard)
+{ navigation.goBack()
+
+}  
+ else {
+    navigation.navigate("Admin")
+ }
+}}
      />}
 
 
