@@ -93,6 +93,8 @@ borderColor:phoneDarkModeCheck ?'red':'white' , top:height-200
               </View>
 
               </View>
+
+              
             </View>
           )
         })}
