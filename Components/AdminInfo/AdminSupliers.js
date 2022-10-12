@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import AdminSuplerAddModel from './AdminSuplierAddModel';
 
 
 
@@ -14,6 +15,7 @@ const {width, height} = Dimensions.get('window')
 let [phoneDarkModeCheck,setPhoneDarkModeCheck]=useState(false)
 const [scrolToTopCheck, setscrolToTopCheck]=useState(false)
 
+const [addModelShow, setaddModelShow]=useState(false)
 
 const scrollRef = useRef();
 
@@ -26,6 +28,8 @@ const scrollRef = useRef();
         
       })))
     })
+
+    // setaddModelShow(false)
     if (colorScheme === 'dark') {
       setPhoneDarkModeCheck(true)
       
@@ -36,10 +40,12 @@ const scrollRef = useRef();
         setPhoneDarkModeCheck(false)
     }
 
+
   },[])
 
 
   let addnewsuplier=()=>{
+    setaddModelShow(true)
 
   }
   const onPressTouch = () => {
@@ -109,6 +115,20 @@ type='outline'
 title={`Add new supplier '${suplier.length}'`} onPress={addnewsuplier} />
 
 </View>
+
+{ addModelShow &&
+  
+  <View 
+  // style={{position:'absolute', zIndex:1, top:15}}
+  >
+  
+  <AdminSuplerAddModel setaddModelShow={setaddModelShow} addModelShow={addModelShow}/>
+
+</View>
+
+
+}
+
 
 <View style={[styles.ontouchScroll,{
 borderColor:phoneDarkModeCheck ?'red':'white' , top:height-200

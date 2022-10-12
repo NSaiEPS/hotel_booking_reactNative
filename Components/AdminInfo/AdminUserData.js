@@ -49,7 +49,9 @@ const AdminUserData = ({length, data, index}) => {
     }
     let conformUnblockUser=()=>{
 
-
+        firestore().collection('users').doc(data.id).update({
+            block:false
+          })
     }
 
 
@@ -72,6 +74,9 @@ const AdminUserData = ({length, data, index}) => {
 
     }
     let conformblockUser=()=>{
+        firestore().collection('users').doc(data.id).update({
+            block:true
+          })
 
 
     }
@@ -166,13 +171,13 @@ const AdminUserData = ({length, data, index}) => {
                         <View>
                             <Text style={{color:'white'}}>
                            {
-                            moreInfo ? 'Less Info':
-                            'More info'
+                            moreInfo ? 'Show less Info':
+                            'Show more info'
                            }  
 
                             </Text>
                             </View>
-                            <View>
+                            <View style={{marginLeft:5}}>
                                 <Text>
                                 <DownIcon
                             onPress={handleMoreInfo}

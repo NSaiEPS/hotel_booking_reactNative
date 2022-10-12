@@ -23,6 +23,7 @@ const HomeScreen = ({navigation}) => {
 
 
 let [phoneDarkModeCheck,setPhoneDarkModeCheck]=useState(false)
+let [userBlocked,setuserBlocked]=useState(false)
 
 
   // let selectAdminSignIn=useSelector(SelectAdminSignIn)
@@ -239,10 +240,55 @@ useEffect(()=>{
         
                 })
                 )
+
+                if(userinformation.data?.block){
+                  setuserBlocked(true)
+                }
          }
   })}
 
 },[user])
+
+// if(userBlocked){
+
+
+//   return(
+//     <div className='Blockuser'>
+//       <div className='Blockuser_inside'>
+//         <div>We are extreamly sorry to inform that you are blocked by the Admin.</div>
+//         <div><div>It's not by your fault! Mail him </div>
+//         <div>
+//  <form
+//   onSubmit={submitFeedbackForm}
+//     style={{maxWidth:'500px', marginLeft:'auto',marginRight:'auto', width:'95%'}}
+//   >
+//   <div className="form-group m-2">
+//     <label for="exampleFormControlInput1">Your Name</label>
+//     <input type="name" className="form-control col-md-5 col-12" id="exampleFormControlInput1"
+//      placeholder="write your name here" required name='user_name' value={userss?.displayName}/>
+//   </div>
+//   <div className="form-group m-2">
+//     <label for="exampleFormControlInput1">Email address</label>
+//     <input type="email" className="form-control" id="exampleFormControlInput1" 
+//     placeholder="write your email address here" required name='user_email' value={userss?.email}/>
+//   </div>
+
+
+//   <div className="form-group m-2">
+//     <label for="exampleFormControlTextarea1">Message</label>
+//     <textarea className="form-control" id="exampleFormControlTextarea1" rows="4"
+//      required name='message'/>
+//   </div>
+//   <button type='submit' className='btn btn-primary m-2'>Submit</button>
+// </form>
+//         </div>
+
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
+
 
 
 // const windowWidth = Dimensions.get('window')

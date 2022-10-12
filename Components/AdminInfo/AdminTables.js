@@ -12,6 +12,7 @@ let [phoneDarkModeCheck,setPhoneDarkModeCheck]=useState(false)
 const colorScheme = Appearance.getColorScheme();
 const {width, height} = Dimensions.get('window')
 // console.log(height)
+// Have to add edit button to select the suplier
 
 
 
@@ -284,3 +285,30 @@ const styles = StyleSheet.create({
   
     }
 })
+
+// <Picker
+//         selectedValue={items.category}
+//         style={{ color:'black',
+      
+    
+//       width:'93%',
+//       backgroundColor:'white',
+    
+      
+//       }}
+//         onValueChange={(itemValue, itemIndex) => setitems({
+//           ...items,
+//           category:itemValue
+//         })}
+//       >
+//         {Constants.products.map((item,index)=> (
+//                <Picker.Item
+//                key={index}
+               
+//                label={item.name}  value={item.name}  />)
+
+
+//         )}
+
+
+//       </Picker>

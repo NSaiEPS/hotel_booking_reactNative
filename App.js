@@ -49,6 +49,8 @@ const globalScreenOptions={
 // Have to show if user is blocked
 // Have to add the footer
 // have to add feedback  form
+// Have to add audio option in booking
+// Password shoe toggle
 function App() {
   return (
     <Provider  store={Store} >
