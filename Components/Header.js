@@ -59,12 +59,15 @@ const Header = ({navigation,dashboard}) => {
         // borderColor:'red',
         // borderWidth:1,
 
-        width:'90%',
+        width:'100%',
         marginLeft:'auto',
         marginRight:'auto',
         backgroundColor:'white',
         height: 75,
-        zIndex:1
+        zIndex:1,
+        // paddingLeft:25,
+        paddingHorizontal:25
+        
         // marginBottom: headerMoreInfo ? 25:0
     }}
     

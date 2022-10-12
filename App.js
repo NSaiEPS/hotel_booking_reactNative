@@ -44,7 +44,11 @@ const globalScreenOptions={
 
 
 
-
+// Have to add splash screen for loadimg
+// Have to add loading for firestore
+// Have to show if user is blocked
+// Have to add the footer
+// have to add feedback  form
 function App() {
   return (
     <Provider  store={Store} >

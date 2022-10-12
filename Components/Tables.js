@@ -303,7 +303,8 @@ size={30} color="white" />
       bookeremail && selectUserSignIn?.email===bookeremail ? '#0000ff':
       active?
        '#ed094b': '#07eb75',
-       width:bookeremail && selectUserSignIn?.email===bookeremail ? 200:150
+       width:bookeremail && selectUserSignIn?.email===bookeremail ? 200:150,
+       borderColor: phoneDarkModeCheck ?'red':'white'
     }]
     
 
