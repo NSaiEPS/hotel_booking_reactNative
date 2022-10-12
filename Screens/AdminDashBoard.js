@@ -5,6 +5,10 @@ import AdminTables from '../Components/AdminInfo/AdminTables';
 import AdminUsers from '../Components/AdminInfo/AdminUsers';
 import AdminSupliers from '../Components/AdminInfo/AdminSupliers';
 import { Button } from 'react-native-elements';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import AdminTopNavigator from '../Components/AdminInfo/AdminTopNavigator';
+
 
 const AdminDashBoard = ({navigation}) => {
   const colorScheme = Appearance.getColorScheme();
@@ -31,6 +35,9 @@ useLayoutEffect(()=>{
 let [adminSelect, setadminSelect]=useState('tables')
 
 
+const Tab = createMaterialTopTabNavigator();
+
+
   return (
     <View>
     <View
@@ -41,11 +48,10 @@ let [adminSelect, setadminSelect]=useState('tables')
     }}
     >
     <Header dashboard={true} navigation={navigation}/></View>
-    {/* <ScrollView> */}
 
     <View style={{ flexDirection:'row', justifyContent:"space-around",marginTop:10}}>
   
-    {/* titleStyle={{ color: 'white'}} */}
+    
 
       <Button containerStyle={{ width:'25%',  }}  
       buttonStyle={{ backgroundColor: adminSelect==='tables' ?'rgba(214, 61, 57, 1)' :"#2089DC" }}    onPress={()=>setadminSelect('tables') } title='Tables'/>
@@ -64,7 +70,9 @@ let [adminSelect, setadminSelect]=useState('tables')
       
     
      </View>
-     {/* </ScrollView> */}
+
+<AdminTopNavigator/>
+   
     </View>
   )
 }

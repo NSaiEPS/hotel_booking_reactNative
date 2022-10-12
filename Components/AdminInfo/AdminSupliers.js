@@ -127,7 +127,7 @@ borderColor:phoneDarkModeCheck ?'red':'white' , top:height-200
         {suplier.map((item,index)=>{
           // console.log(item.data)
           return(
-            <View key={index} style={{marginTop:7, borderWidth:1, borderColor:'red'}}>
+            <View key={item.id} style={{marginTop:7, borderWidth:1, borderColor:'red'}}>
               <View style={styles.addsuplierInside}>
                 <View style={styles.addsuplierInsideLeft}> 
                   <Text style={styles.addsuplierInsideLeftText} >Name</Text>

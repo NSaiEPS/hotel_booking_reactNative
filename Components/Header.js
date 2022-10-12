@@ -1,4 +1,4 @@
-import { Appearance, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Alert, Appearance, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Fontisto';
 import { Button, Input ,Image} from 'react-native-elements'
@@ -14,12 +14,7 @@ const Header = ({navigation,dashboard}) => {
     const [headerMoreInfo, setheaderMoreInfo] = useState(false)
   let selectAdminSignIn=useSelector(SelectAdminSignIn)
 
-    // const []
-    // useEffect(()=>{
-    //     auth.onAuthStateChanged((authUser)=>{
-    //      console.log(authUser.email)
-        
-    //     })},[])
+
 
   let handleMoreOptions=()=>{
     // alert(headerMoreInfo)
@@ -27,9 +22,26 @@ const Header = ({navigation,dashboard}) => {
   }
 
   let handleSignOut=()=>{
-    auth().signOut().then(()=>{
+
+    Alert.alert('Warning','Are you sure to delete this table!',[
+
+      {text:"Yes",
+      onPress:()=>{ auth().signOut().then(()=>{
         navigation.replace("Login")
-      })
+      })},
+      style:'cancel'
+      },
+      {text:"No",
+      // onPress:()=>alert('Cancelled deleting'),
+      style:'default'
+      },
+      
+      
+      ],
+      {cancelable:true}
+          )
+
+   
   }
 //   const colorScheme = Appearance.getColorScheme();
 
@@ -50,7 +62,7 @@ const Header = ({navigation,dashboard}) => {
         width:'90%',
         marginLeft:'auto',
         marginRight:'auto',
-        // backgroundColor:'white',
+        backgroundColor:'white',
         height: 75,
         zIndex:1
         // marginBottom: headerMoreInfo ? 25:0

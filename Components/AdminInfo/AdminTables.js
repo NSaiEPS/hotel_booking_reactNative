@@ -131,6 +131,7 @@ const {width, height} = Dimensions.get('window')
         }
   return (
     <View style={{ position:'relative'}}>
+      
 
         <View style={{marginBottom:10}}>
 
@@ -166,7 +167,7 @@ borderColor:phoneDarkModeCheck ?'red':'white' , top:height-200
         tables.map((item,index)=>{
           // console.log(item.data)
           return(
-<View key={index} style={{ marginTop:5, borderColor:'red', borderWidth:1,marginBottom: index+1===tables.length ?525:0 }}>
+<View key={item.id} style={{ marginTop:5, borderColor:'red', borderWidth:1,marginBottom: index+1===tables.length ?525:0 }}>
 
 <View  style={styles.adminTablestables} >
     <View style={styles.adminTablestablesLeft} >
