@@ -5,6 +5,8 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import EditIcon from 'react-native-vector-icons/Entypo';
 import DeleteIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import UploadIcon from 'react-native-vector-icons/Feather';
+import AdminTableData from './AdminTableData';
 
 
 
@@ -55,48 +57,48 @@ const {width, height} = Dimensions.get('window')
         })}
 
   
-        let conformDeleteTable=(id,bookeduserid,survedid)=>{
-          firestore().collection('tables').doc(id).delete()
+        // let conformDeleteTable=(id,bookeduserid,survedid)=>{
+        //   firestore().collection('tables').doc(id).delete()
            
         
-          firestore().collection('users').doc(bookeduserid).update({
-            ['survedby']: '',
-            ['table']:'',
-            ['active']:'',
+        //   firestore().collection('users').doc(bookeduserid).update({
+        //     ['survedby']: '',
+        //     ['table']:'',
+        //     ['active']:'',
       
-          })
+        //   })
       
-          firestore().collection('suppliers').doc(survedid).update({
-            ['survingTable']:``,
-          })
+        //   firestore().collection('suppliers').doc(survedid).update({
+        //     ['survingTable']:``,
+        //   })
       
       
       
          
       
 
-        }
-        let handleDeleteTable=(id,bookeduserid,survedid)=>{
-          // console.log(id,bookeduserid,survedid)
+        // }
+        // let handleDeleteTable=(id,bookeduserid,survedid)=>{
+        //   // console.log(id,bookeduserid,survedid)
         
 
-          Alert.alert('Warning','Are you sure to delete this table!',[
+        //   Alert.alert('Warning','Are you sure to delete this table!',[
 
-            {text:"Yes",
-            onPress:()=>{conformDeleteTable(id,bookeduserid,survedid)},
-            style:'cancel'
-            },
-            {text:"No",
-            // onPress:()=>alert('Cancelled deleting'),
-            style:'default'
-            },
+        //     {text:"Yes",
+        //     onPress:()=>{conformDeleteTable(id,bookeduserid,survedid)},
+        //     style:'cancel'
+        //     },
+        //     {text:"No",
+        //     // onPress:()=>alert('Cancelled deleting'),
+        //     style:'default'
+        //     },
             
             
-            ],
-            {cancelable:true}
-                )
+        //     ],
+        //     {cancelable:true}
+        //         )
 
-        }
+        // }
 
 
 
@@ -134,42 +136,46 @@ const {width, height} = Dimensions.get('window')
         }
 
          
-        let conformDeletesuplierEmail=(id,bookeduserid,survedid)=>{
-          firestore().collection('tables').doc(id).update({
-            ['survedby']: '',
-            ['survedid']:'',
+        // let conformDeletesuplierEmail=(id,bookeduserid,survedid)=>{
+        //   firestore().collection('tables').doc(id).update({
+        //     ['survedby']: '',
+        //     ['survedid']:'',
             
       
-          })
-          firestore().collection('users').doc(bookeduserid).update({
-            ['survedby']: '',
+        //   })
+        //   firestore().collection('users').doc(bookeduserid).update({
+        //     ['survedby']: '',
       
-          })
+        //   })
       
-          firestore().collection('suppliers').doc(survedid).update({
-            ['survingTable']:``,
-          })
-        }
+        //   firestore().collection('suppliers').doc(survedid).update({
+        //     ['survingTable']:``,
+        //   })
+        // }
 
 
-        let handleDeleteSuplier=()=>{
-          Alert.alert('Warning','Are you sure to delete this supplier for this table!',[
+        // let handleDeleteSuplier=()=>{
+        //   Alert.alert('Warning','Are you sure to delete this supplier for this table!',[
 
-            {text:"Yes",
-            onPress:()=>{conformDeletesuplierEmail(id,bookeduserid,survedid)},
-            style:'cancel'
-            },
-            {text:"No",
-            // onPress:()=>alert('Cancelled deleting'),
-            style:'default'
-            },
+        //     {text:"Yes",
+        //     onPress:()=>{conformDeletesuplierEmail(id,bookeduserid,survedid)},
+        //     style:'cancel'
+        //     },
+        //     {text:"No",
+        //     // onPress:()=>alert('Cancelled deleting'),
+        //     style:'default'
+        //     },
             
             
-            ],
-            {cancelable:true}
-                )
+        //     ],
+        //     {cancelable:true}
+        //         )
 
-        }
+        // }
+
+
+
+
   return (
     <View style={{ position:'relative'}}>
       
@@ -208,90 +214,103 @@ borderColor:phoneDarkModeCheck ?'red':'white' , top:height-200
         tables.map((item,index)=>{
           // console.log(item.data)
           return(
-<View key={item.id} style={{ marginTop:5, borderColor:'red', borderWidth:1,marginBottom: index+1===tables.length ?525:0 }}>
+          <AdminTableData item={item} id={item.id} index={index} length={tables.length} key={item.id}/>)
 
-<View  style={styles.adminTablestables} >
-    <View style={styles.adminTablestablesLeft} >
-     <Text style={styles.adminTablestablesLeftText}>Name</Text>
-       </View>
-       <View>
-     <Text  style={{color:'white'}}>Table {index+1}</Text>
-       </View>
-       </View>
+//           return(
+
+// <View key={item.id} style={{ marginTop:5, borderColor:'red', borderWidth:1,marginBottom: index+1===tables.length ?525:0 }}>
+
+// <View  style={styles.adminTablestables} >
+//     <View style={styles.adminTablestablesLeft} >
+//      <Text style={styles.adminTablestablesLeftText}>Name</Text>
+//        </View>
+//        <View>
+//      <Text  style={{color:'white'}}>Table {index+1}</Text>
+//        </View>
+//        </View>
 
 
-       <View style={styles.adminTablestables}>
-  <View style={styles.adminTablestablesLeft} >
-     <Text style={styles.adminTablestablesLeftText}>Status</Text>
-       </View>
-       <View>
-     <Text  style={{color:'white'}}>{ item.data?.active ? 'Booked' :' Not yet booked'} </Text>
-       </View>
-       </View>
+//        <View style={styles.adminTablestables}>
+//   <View style={styles.adminTablestablesLeft} >
+//      <Text style={styles.adminTablestablesLeftText}>Status</Text>
+//        </View>
+//        <View>
+//      <Text  style={{color:'white'}}>{ item.data?.active ? 'Booked' :' Not yet booked'} </Text>
+//        </View>
+//        </View>
 
-       <View style={styles.adminTablestables}>
-  <View style={styles.adminTablestablesLeft} >
-     <Text style={styles.adminTablestablesLeftText}>Bookedby</Text>
-       </View>
-       <View >
-     <Text style={{color:'white'}}>{item.data?.bookedby ? item.data?.bookedby :'--' }</Text>
-       </View>
-       </View>
+//        <View style={styles.adminTablestables}>
+//   <View style={styles.adminTablestablesLeft} >
+//      <Text style={styles.adminTablestablesLeftText}>Bookedby</Text>
+//        </View>
+//        <View >
+//      <Text style={{color:'white'}}>{item.data?.bookedby ? item.data?.bookedby :'--' }</Text>
+//        </View>
+//        </View>
 
-       <View style={styles.adminTablestables}>
-  <View style={styles.adminTablestablesLeft} >
-     <Text style={styles.adminTablestablesLeftText}>SurvedBy</Text>
-       </View>
-       <View style={{width:'45%'}} >
-        {
-          item.data?.active ? 
-          item.data?.survedby ? 
+//        <View style={styles.adminTablestables}>
+//   <View style={styles.adminTablestablesLeft} >
+//      <Text style={styles.adminTablestablesLeftText}>SurvedBy</Text>
+//        </View>
+//        <View style={{width:'45%'}} >
+//         {
+//           item.data?.active ? 
+//           item.data?.survedby ? 
           
-          <View style={{flexDirection:'row', justifyContent:'space-between'}} >
- <View>
-            <Text style={{color:'white', fontWeight:'700'}}>{item.data?.survedby?.split('@')[0]}</Text>
-           </View>
-           <View>
-            <EditIcon name='edit' color='green' size={25} />
-           </View>
-           <View>
-            <DeleteIcon 
-            onPress={()=>{handleDeleteSuplier((item.id,item.data.bookeduserid, item.data?.survedid))}}
-            name='delete' color='red' size={25} />
-           </View>
-            </View>
+//           <View style={{flexDirection:'row', justifyContent:'space-between'}} >
+//  <View>
+//             <Text style={{color:'white', fontWeight:'700'}}>{item.data?.survedby?.split('@')[0]}</Text>
+//            </View>
+//            <View>
+//             {
+//               supliersEmail ?  <UploadIcon 
+//               onPress={()=>setSupliersEmail(true)}
+//               name='edit' color='green' size={25} />:
+//             <EditIcon 
+//             onPress={()=>setSupliersEmail(true)}
+//             name='edit' color='green' size={25} />}
+//            </View>
+//            <View>
+//             <DeleteIcon 
+//             onPress={()=>{handleDeleteSuplier((item.id,item.data.bookeduserid, item.data?.survedid))}}
+//             name='delete' color='red' size={25} />
+//            </View>
+//             </View>
           
-          :
+//           :
 
-          <View style={{flexDirection:'row'}}>
-           <View >
-            <Text style={{color:'white', fontWeight:'700'}}>click edit button to select the suplier</Text>
-           </View>
-           <View>
-            <EditIcon name='edit' color='green' size={25} />
-           </View>
-            </View>
+//           <View style={{flexDirection:'row'}}>
+//            <View >
+//             <Text style={{color:'white', fontWeight:'700'}}>click edit button to select the suplier</Text>
+//            </View>
+//            <View>{
+//             }
+//             <EditIcon 
+//             onPress={()=>setSupliersEmail(true)}
+//             name='edit' color='green' size={25} />
+//            </View>
+//             </View>
 
           
-          :<Text> '--'</Text>
-        }
-     {/* <Text style={{color:'white'}} >{item.data?.active ? 
-     item.data?.survedby? item.data?.survedby?.split('@')[0]:
+//           :<Text> '--'</Text>
+//         }
+//      {/* <Text style={{color:'white'}} >{item.data?.active ? 
+//      item.data?.survedby? item.data?.survedby?.split('@')[0]:
      
-     "click edit button to select the suplier":
-      '--'} </Text> */}
-       </View>
-       </View>
+//      "click edit button to select the suplier":
+//       '--'} </Text> */}
+//        </View>
+//        </View>
 
 
 
 
 
   
-   <Button  title='Delete this Table'
-   buttonStyle={{ backgroundColor: '#f65353' , width:150, margin:5 }} 
-   onPress={()=>handleDeleteTable(item.id,item.data.bookeduserid, item.data?.survedid)}
-   /> 
+//    <Button  title='Delete this Table'
+//    buttonStyle={{ backgroundColor: '#f65353' , width:150, margin:5 }} 
+//    onPress={()=>handleDeleteTable(item.id,item.data.bookeduserid, item.data?.survedid)}
+//    /> 
 
   
   
@@ -299,8 +318,8 @@ borderColor:phoneDarkModeCheck ?'red':'white' , top:height-200
 
 
 
-</View>
-          )
+// </View>
+//           )
         })
       }
 
