@@ -12,7 +12,7 @@ import firestore from '@react-native-firebase/firestore';
 const TablesInfoScreen = ({navigation, route}) => {
   let selectOrderInfo=useSelector(SelectOrderInfo)
   const windowWidth = Dimensions.get('window')
-console.log(windowWidth,'order screen')
+// console.log(windowWidth,'order screen')
 
   useLayoutEffect(()=>{
     navigation.setOptions({headerShown: false})
@@ -65,12 +65,16 @@ let handleAddOrders=()=>{
            fontSize:22,
            fontWeight:'700'
           }}
-          >
+          >{
+            selectOrderInfo.survedby===selectUserSignIn?.email ? 
+            `Helo '${selectUserSignIn?.name}' this is your supplying order page ( ${selectOrderInfo.tablenumb})`
+            :
+          
             
-            Helo '{selectUserSignIn?.name}' this is your order booking page (Table {selectUserSignIn?.tablebooked})
+            `Helo '${selectUserSignIn?.name}' this is your order booking page (Table ${selectUserSignIn?.tablebooked})`
             
 
-           
+          }
           </Text>
           <View
             

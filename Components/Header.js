@@ -23,7 +23,7 @@ const Header = ({navigation,dashboard}) => {
 
   let handleSignOut=()=>{
 
-    Alert.alert('Warning','Are you sure to delete this table!',[
+    Alert.alert('Warning','Are you sure to Logout!',[
 
       {text:"Yes",
       onPress:()=>{ auth().signOut().then(()=>{

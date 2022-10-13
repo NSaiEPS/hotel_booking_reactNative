@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Iconedit from 'react-native-vector-icons/MaterialIcons';
 
 import firestore from '@react-native-firebase/firestore';
-import { SelectOrderInfo } from './Redux/Redux_Slice';
+import { SelectOrderInfo, SelectUserSignIn } from './Redux/Redux_Slice';
 import { useSelector } from 'react-redux';
 
 
@@ -12,6 +12,8 @@ import { useSelector } from 'react-redux';
 const OrderItems = ({item,length,index}) => {
     
     let selectOrderInfo=useSelector(SelectOrderInfo)
+  let selectUserSignIn=useSelector(SelectUserSignIn)
+
 
    const [orderInputs, setorderInputs] = useState({
     name:item.data?.name,
@@ -175,14 +177,22 @@ const OrderItems = ({item,length,index}) => {
              keyboardType='decimal-pad'
                value={orderInputs.price}
                onChangeText={(text)=>{
-                if(true){
-                alert("U can't edit the price, only the supplier can edit the price")}
-                else{
-                   setorderInputs({
-                       ...orderInputs,
-                       price:text
-                   })
+             
+                if(selectOrderInfo.survedby===selectUserSignIn?.email){
+                    if(orderInputs.edit){
+                        setorderInputs({
+                            ...orderInputs,
+                            price:text
+                        })
+                    }
+                    else{
+                    
+                        alert("Please click edit button to edit")}
+
                 }
+                else{
+                    
+                    alert("U can't edit the price, only the supplier can edit the price")}
    
                }}
             />

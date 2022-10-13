@@ -4,7 +4,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Entypo';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderBookingInfo, SelectUserSignIn } from './Redux/Redux_Slice';
+import { orderBookingInfo, SelectAdminSignIn, SelectUserSignIn } from './Redux/Redux_Slice';
 import firestore from '@react-native-firebase/firestore';
 
 
@@ -12,7 +12,10 @@ const Tables = ({name, active, bookedby, survedby, id, index,bookerid, bookerema
  
    const [orderMoreOptions, setorderMoreOptions] = useState(false)
    let selectUserSignIn=useSelector(SelectUserSignIn)
-  //  console.log(selectUserSignIn)
+  let selectAdminSignIn=useSelector(SelectAdminSignIn)
+  // console.log((selectUserSignIn?.email?.includes('@deviresidenciessupliers.com')))
+
+  //  console.log(selectAdminSignIn)
   let dispatch=useDispatch()
 
  let handleOrderMoreOptions=()=>{
@@ -118,12 +121,24 @@ style:'default'
 let handleBookbnt=()=>{
   // console.log(selectUserSignIn?.tablebooked)
 
-  if(selectUserSignIn?.tablebooked){
-    alert(`U can't book more than 1 table!`)
-  }
-  else {
-  
+ 
 
+  
+  if(!active){
+// run only is !active
+     if(selectAdminSignIn){
+  alert("Admin can't book the table")
+   }
+
+    if(selectUserSignIn?.tablebooked){
+      alert(`U can't book more than 1 table!`)
+    }
+    if(selectUserSignIn?.email?.includes('@deviresidenciessupliers.com')){
+      alert("Suplier can't book table")
+    }
+
+    else {
+  
   
 
 firestore().collection('tables').doc(id).update({
@@ -148,7 +163,7 @@ firestore().collection('users').doc((selectUserSignIn?.userId)).collection('hist
   timestamp:timestamp,
   showtime:showtime
 })
-
+    }
 }
 
 }
@@ -176,7 +191,8 @@ let onclickingOrders=()=>{
      bookeduserid:bookerid,
      tableid:id,
      tablenumb:tablenum,
-     bookername:bookedby
+     bookername:bookedby,
+     survedby:survedby
    }
 
    )
@@ -216,7 +232,9 @@ useEffect(()=>{
 
  
 },[(Appearance.addChangeListener)])
-  return (
+ 
+
+return (
     <View
     style={[styles.tables,
       {marginBottom:length===index+1? 225:0,
@@ -240,7 +258,7 @@ useEffect(()=>{
       > Table {index+1}</Text>
 
       {
-        bookeremail && selectUserSignIn?.email===bookeremail &&
+       (bookeremail && selectUserSignIn?.email===bookeremail || survedby===selectUserSignIn?.email)  &&
         
       
 
@@ -300,10 +318,10 @@ size={30} color="white" />
     styles.tablesMiddlePartBookbtn,
     {
       backgroundColor: 
-      bookeremail && selectUserSignIn?.email===bookeremail ? '#0000ff':
+      (bookeremail && selectUserSignIn?.email===bookeremail || survedby===selectUserSignIn?.email) ? '#0000ff':
       active?
        '#ed094b': '#07eb75',
-       width:bookeremail && selectUserSignIn?.email===bookeremail ? 200:150,
+       width:(bookeremail && selectUserSignIn?.email===bookeremail || survedby===selectUserSignIn?.email)? 200:150,
        borderColor: phoneDarkModeCheck ?'red':'white'
     }]
     
@@ -323,7 +341,7 @@ size={30} color="white" />
         }}
         onPress={handleBookbnt}
 
-        >{
+        >{ survedby===selectUserSignIn?.email ? "It's your supplying table":
           bookeremail && selectUserSignIn?.email===bookeremail ? "It's your table, enjoy!":
         
           

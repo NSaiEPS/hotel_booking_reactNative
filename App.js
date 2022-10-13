@@ -42,7 +42,7 @@ const globalScreenOptions={
 
   }
 
-
+                   // Requirements
 
 // Have to add splash screen for loadimg
 // Have to add loading for firestore
@@ -51,6 +51,12 @@ const globalScreenOptions={
 // have to add feedback  form
 // Have to add audio option in booking
 // Password shoe toggle
+// Supliers table //  completed
+// If the suplier register he should not inclcude in users collection //completed
+
+
+
+
 function App() {
   return (
     <Provider  store={Store} >
