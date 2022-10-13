@@ -301,7 +301,7 @@ buttonStyle={{
                 color: 'white',
                 // marginHorizontal: 20,
               }}
-              onPress={()=>navigation.goBack()}
+              onPress={()=>navigation.replace('Login')}
 />
 
 {/* 

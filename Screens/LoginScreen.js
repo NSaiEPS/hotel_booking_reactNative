@@ -78,30 +78,6 @@ const LoginScreen = ({navigation}) => {
 
 
 
-useEffect(()=>{
-   const subscriber= auth().onAuthStateChanged((authUser)=>{
-    //  console.log(authUser)
-     if(authUser){
-        dispatch(
-        userSignInAction({
-            email:authUser?.email,
-            name:authUser?.displayName
-
-        })
-        )
-
-       navigation.replace("Home")
-       if(authUser?.email==='deviresidencies@admin.com'){
-        dispatch(
-            adminSignInAction(true)
-        )
-       }
-
-     }
-    })
-   
-   return subscriber;
-    },[])
 
 
 
@@ -122,6 +98,42 @@ useEffect(()=>{
     }
 
   
+    useEffect(()=>{
+         
+      // setInput({
+      //   ...input,
+      //   email:'',
+      //   password:'',
+      //   passwordToggle:false
+
+      // })
+
+      const subscriber= auth().onAuthStateChanged((authUser)=>{
+       //  console.log(authUser)
+        if(authUser){
+           dispatch(
+           userSignInAction({
+               email:authUser?.email,
+               name:authUser?.displayName
+   
+           })
+           )
+   
+          navigation.replace("Home")
+          if(authUser?.email==='deviresidencies@admin.com'){
+           dispatch(
+               adminSignInAction(true)
+           )
+          }
+   
+        }
+       })
+      
+      return subscriber;
+       },[])
+
+       
+
 
   return (
     <SafeAreaView style={styles.registerScreen }>
