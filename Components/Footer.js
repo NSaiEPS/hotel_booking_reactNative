@@ -3,12 +3,18 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <View>
-      <Text>Footer</Text>
+    <View style={styles.footer}>
+      <Text style={{color:'white'}} >Footer</Text>
     </View>
   )
 }
 
 export default Footer
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  footer:{
+    backgroundColor:'red',
+    color:'white',
+   zIndex:4
+  }
+  })

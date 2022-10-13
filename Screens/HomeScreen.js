@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SelectAdminSignIn, SelectUserSignIn, userSignInAction } from '../Components/Redux/Redux_Slice'
 // import { Firestore } from 'firebase/firestore'
 import firestore from '@react-native-firebase/firestore';
+import UserBlockedshow from '../Components/UserBlockedshow'
+import Footer from '../Components/Footer'
 
 
 
@@ -337,6 +339,12 @@ let handleScroll=(e)=>{
 }
 
 
+if(userBlocked){
+  return(
+  <UserBlockedshow userBlocked={userBlocked}/>)
+}
+
+
 
 return (
     <SafeAreaView>
@@ -384,7 +392,16 @@ bookeremail={item.data.bookeremail}  navigation={navigation} length={tables.leng
 
           )})
         }
+
+{/* <View style={styles.homeScreenFooter}>
+
+      <Footer/>
+      </View> */}
+
       </ScrollView>
+
+      
+
      
     </View>
     </SafeAreaView>
@@ -420,5 +437,10 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     // alignSelf:'center'
 
+  },
+  homeScreenFooter:{
+    backgroundColor:'red',
+    color:'white',
+   zIndex:4
   }
 })

@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import EditIcon from 'react-native-vector-icons/Entypo';
+import DeleteIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 
@@ -85,7 +87,7 @@ const {width, height} = Dimensions.get('window')
             style:'cancel'
             },
             {text:"No",
-            onPress:()=>alert('Cancelled deleting'),
+            // onPress:()=>alert('Cancelled deleting'),
             style:'default'
             },
             
@@ -129,6 +131,44 @@ const {width, height} = Dimensions.get('window')
             setscrolToTopCheck(false)
           }
         
+        }
+
+         
+        let conformDeletesuplierEmail=(id,bookeduserid,survedid)=>{
+          firestore().collection('tables').doc(id).update({
+            ['survedby']: '',
+            ['survedid']:'',
+            
+      
+          })
+          firestore().collection('users').doc(bookeduserid).update({
+            ['survedby']: '',
+      
+          })
+      
+          firestore().collection('suppliers').doc(survedid).update({
+            ['survingTable']:``,
+          })
+        }
+
+
+        let handleDeleteSuplier=()=>{
+          Alert.alert('Warning','Are you sure to delete this supplier for this table!',[
+
+            {text:"Yes",
+            onPress:()=>{conformDeletesuplierEmail(id,bookeduserid,survedid)},
+            style:'cancel'
+            },
+            {text:"No",
+            // onPress:()=>alert('Cancelled deleting'),
+            style:'default'
+            },
+            
+            
+            ],
+            {cancelable:true}
+                )
+
         }
   return (
     <View style={{ position:'relative'}}>
@@ -203,11 +243,43 @@ borderColor:phoneDarkModeCheck ?'red':'white' , top:height-200
      <Text style={styles.adminTablestablesLeftText}>SurvedBy</Text>
        </View>
        <View style={{width:'45%'}} >
-     <Text style={{color:'white'}} >{item.data?.active ? 
+        {
+          item.data?.active ? 
+          item.data?.survedby ? 
+          
+          <View style={{flexDirection:'row', justifyContent:'space-between'}} >
+ <View>
+            <Text style={{color:'white', fontWeight:'700'}}>{item.data?.survedby?.split('@')[0]}</Text>
+           </View>
+           <View>
+            <EditIcon name='edit' color='green' size={25} />
+           </View>
+           <View>
+            <DeleteIcon 
+            onPress={()=>{handleDeleteSuplier((item.id,item.data.bookeduserid, item.data?.survedid))}}
+            name='delete' color='red' size={25} />
+           </View>
+            </View>
+          
+          :
+
+          <View style={{flexDirection:'row'}}>
+           <View >
+            <Text style={{color:'white', fontWeight:'700'}}>click edit button to select the suplier</Text>
+           </View>
+           <View>
+            <EditIcon name='edit' color='green' size={25} />
+           </View>
+            </View>
+
+          
+          :<Text> '--'</Text>
+        }
+     {/* <Text style={{color:'white'}} >{item.data?.active ? 
      item.data?.survedby? item.data?.survedby?.split('@')[0]:
      
      "click edit button to select the suplier":
-      '--'} </Text>
+      '--'} </Text> */}
        </View>
        </View>
 

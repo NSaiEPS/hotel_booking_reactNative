@@ -137,7 +137,8 @@ let handleBookbnt=()=>{
       alert("Suplier can't book table")
     }
 
-    else {
+    if(!selectAdminSignIn && !selectUserSignIn?.tablebooked && !selectUserSignIn?.email?.includes('@deviresidenciessupliers.com'))
+     {
   
   
 

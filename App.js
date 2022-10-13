@@ -53,6 +53,7 @@ const globalScreenOptions={
 // Password shoe toggle
 // Supliers table //  completed
 // If the suplier register he should not inclcude in users collection //completed
+// Have to add email for feed back form  //completed
 
 
 
