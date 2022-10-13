@@ -47,16 +47,18 @@ const globalScreenOptions={
 // Have to add splash screen for loadimg
 // Have to add loading for firestore
 // Have to add the footer
-// have to add feedback  form
 // Have to add audio option in booking
 
 
-
+                // Completed     
 // Supliers table //  completed
 // If the suplier register he should not inclcude in users collection //completed
 // Have to add email for feed back form  //completed
 // Have to show if user is blocked  //completed
 // Password show2 toggle //completed
+// Feed backs in admin //completed
+// have to add feedback  form //completed
+
 
 
 

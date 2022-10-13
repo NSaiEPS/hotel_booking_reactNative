@@ -7,12 +7,14 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import { SelectAdminSignIn } from './Redux/Redux_Slice';
 import { useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
+import FeedBack from './FeedBack';
 
 
   
 const Header = ({navigation,dashboard}) => {
     const [headerMoreInfo, setheaderMoreInfo] = useState(false)
   let selectAdminSignIn=useSelector(SelectAdminSignIn)
+  const [feedBackModel, setfeedBackModel] = useState(false)
 
 
 
@@ -188,10 +190,30 @@ size={30} color="black" />
     navigation.navigate("Admin")
  }
 }}
-     />}
+     />
+     
+     
+     }
+
+<Button
+     title='FeedBack'
+     type='outline'  
+     onPress={()=>{
+       
+setfeedBackModel(true)
+setheaderMoreInfo(false)
+
+}}
+     />
 
 
         </View>}
+
+        {feedBackModel &&
+        <View style={{position:'absolute'}} >
+        <FeedBack  modelOpen={feedBackModel} setModelOpenState={setfeedBackModel}/>
+        </View>
+        }
     </View>
 )
 

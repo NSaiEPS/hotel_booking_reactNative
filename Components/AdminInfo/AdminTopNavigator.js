@@ -6,6 +6,7 @@ import AdminTables from './AdminTables';
 import AdminUsers from './AdminUsers';
 import AdminSupliers from './AdminSupliers';
 import { SceneMap, TabView } from 'react-native-tab-view';
+import AdminFeedBacks from './AdminFeedBacks';
 
 const AdminTopNavigator = () => {
 const Tab = createMaterialTopTabNavigator();
@@ -14,7 +15,8 @@ const Tab = createMaterialTopTabNavigator();
 const renderScene = SceneMap({
   first: AdminTables,
   second: AdminUsers,
-  third:AdminSupliers
+  third:AdminSupliers,
+  fourth:AdminFeedBacks
 });
 
 const [index, setIndex] = useState(0);
@@ -23,7 +25,8 @@ const [index, setIndex] = useState(0);
 const [routes] = useState([
   { key: 'first', title: 'tables' },
   { key: 'second', title: 'users' },
-  { key: 'third', title: 'suppliers' },
+  { key: 'third', title: 'supliers' },
+  { key: 'fourth', title: 'feedback' },
 ]);
 
   return (
