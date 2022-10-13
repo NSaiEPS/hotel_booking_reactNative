@@ -5,6 +5,8 @@ import { Button, Image, Input } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import { adminSignInAction, userSignInAction } from '../Components/Redux/Redux_Slice';
 import auth from '@react-native-firebase/auth';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 
 const LoginScreen = ({navigation}) => {
@@ -105,7 +107,8 @@ useEffect(()=>{
 
     const [input, setInput]=useState({
         email:'',
-        password:''
+        password:'',
+        passwordToggle:false
     })
 
     const submitToLogin=(e)=>{
@@ -191,8 +194,10 @@ useEffect(()=>{
         
         
         />
-         <Input placeholder='Enter your Password here ..'
-         secureTextEntry
+                <View style={{position:'relative'}} >
+
+                <Input placeholder='Enter your Password here ..'
+         secureTextEntry={input.passwordToggle ? false: true}
          value={input.password}
          onChangeText={(text)=>{
              setInput({
@@ -207,6 +212,29 @@ useEffect(()=>{
          onSubmitEditing={submitToLogin}
          
          />
+  <View style={{position:'absolute', right:25, top:13, backgroundColor:'white'}}>
+<Icon  
+onPress={()=>{
+  setInput({
+...input,
+passwordToggle:!input.passwordToggle
+})
+}}
+
+name= {input.passwordToggle ? 'eye': 'eye-slash'} color='black'  size={25}/>
+</View>
+
+
+
+  </View>
+
+ 
+
+
+
+
+
+         
 
    
             

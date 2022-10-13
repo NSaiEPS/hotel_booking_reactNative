@@ -2,6 +2,8 @@
 import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import firestore from '@react-native-firebase/firestore';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 
 const AdminSuplerAddModel = ({setaddModelShow,addModelShow}) => {
@@ -9,7 +11,8 @@ const AdminSuplerAddModel = ({setaddModelShow,addModelShow}) => {
     const [input, Setinput] = useState({
         name:'',
         email:'',
-        password:''
+        password:'',
+        passwordToggle:false
     });
     const [submitted, SetSubmitted] = useState(false);
 
@@ -94,6 +97,8 @@ let hadleSubmitForm=()=>{
                
                />
 
+               <View style={{position:'relative'}} >
+
              <TextInput
                placeholder='Enter the pasword of the supplier'
                onChangeText={(text)=>{
@@ -104,10 +109,25 @@ let hadleSubmitForm=()=>{
                }}
                style={styles.supliersinput}
 
-               secureTextEntry
+               secureTextEntry={input.passwordToggle ? false :true}
                value={input.password}
                onSubmitEditing={hadleSubmitForm}
                />
+               <View style={{position:'absolute', right:15, top:18, backgroundColor:'white'}}>
+<Icon  
+onPress={()=>{
+  Setinput({
+    ...input,
+    passwordToggle:!input.passwordToggle
+})
+}}
+
+name= {input.passwordToggle ? 'eye': 'eye-slash'} color='black'  size={25}/>
+</View>
+
+
+
+               </View>
 
 
               </View>

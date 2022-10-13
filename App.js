@@ -49,7 +49,6 @@ const globalScreenOptions={
 // Have to add the footer
 // have to add feedback  form
 // Have to add audio option in booking
-// Password show2 toggle
 
 
 
@@ -57,6 +56,8 @@ const globalScreenOptions={
 // If the suplier register he should not inclcude in users collection //completed
 // Have to add email for feed back form  //completed
 // Have to show if user is blocked  //completed
+// Password show2 toggle //completed
+
 
 
 

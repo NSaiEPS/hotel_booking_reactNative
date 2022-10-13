@@ -4,6 +4,8 @@ import { Button, Image, Input } from 'react-native-elements';
 // import { auth, db } from '../Firebase';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 
 const RegisterScreen = ({navigation}) => {
@@ -61,7 +63,8 @@ const RegisterScreen = ({navigation}) => {
     const [input, setInput]=useState({
         name:'',
         email:'',
-        password:''
+        password:'',
+        passwordToggle:false,
     })
 
 
@@ -207,8 +210,13 @@ const RegisterScreen = ({navigation}) => {
         
         
         />
-         <Input placeholder='Enter your Password here ..'
-         secureTextEntry
+
+
+<View style={{position:'relative'}} >
+
+<Input placeholder='Enter your Password here ..'
+      secureTextEntry={input.passwordToggle ? false: true}
+
          value={input.password}
          onChangeText={(text)=>{
              setInput({
@@ -222,6 +230,31 @@ const RegisterScreen = ({navigation}) => {
            onSubmitEditing={submitToRegister}
          
          />
+
+
+
+
+
+
+
+<View style={{position:'absolute', right:25, top:13, backgroundColor:'white'}}>
+<Icon  
+onPress={()=>{
+setInput({
+...input,
+passwordToggle:!input.passwordToggle
+})
+}}
+
+name= {input.passwordToggle ? 'eye': 'eye-slash'} color='black'  size={25}/>
+</View>
+
+
+
+</View>
+
+
+        
 
    
             
