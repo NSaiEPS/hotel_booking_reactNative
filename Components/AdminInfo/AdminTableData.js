@@ -7,10 +7,13 @@ import EditIcon from 'react-native-vector-icons/Entypo';
 import DeleteIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import UploadIcon from 'react-native-vector-icons/MaterialIcons';
 import { Picker } from '@react-native-picker/picker';
+import { serverTimestamp } from 'firebase/firestore';
 
 
 
 const AdminTableData = ({item, length, id, index}) => {
+    // console.log(item.data)
+    
     const [supliersEmail, setSupliersEmail] = useState(false)
     const [supliersEmailselect, setSupliersEmailselect] = useState('')
 
@@ -31,19 +34,25 @@ const [users, setUsers] = useState([])
 // console.log(users)
 
     let conformDeleteTable=(id,bookeduserid,survedid)=>{
-        firestore().collection('tables').doc(id).delete()
+        // console.log(id,bookeduserid,survedid)
+        if(item.data.active){
+        firestore().collection('tables').doc(item.id).delete()
          
       
-        firestore().collection('users').doc(bookeduserid).update({
+        firestore().collection('users').doc(item.data.bookeduserid).update({
           ['survedby']: '',
           ['table']:'',
           ['active']:'',
     
         })
     
-        firestore().collection('suppliers').doc(survedid).update({
+        firestore().collection('suppliers').doc(item.data.survedid).update({
           ['survingTable']:``,
-        })
+        })}
+        else {
+        firestore().collection('tables').doc(item.id).delete()
+
+        }
     
     
     
@@ -58,7 +67,7 @@ const [users, setUsers] = useState([])
         Alert.alert('Warning','Are you sure to delete this table!',[
 
           {text:"Yes",
-          onPress:()=>{conformDeleteTable(id,bookeduserid,survedid)},
+          onPress:()=>{conformDeleteTable()},
           style:'cancel'
           },
           {text:"No",
@@ -78,18 +87,18 @@ const [users, setUsers] = useState([])
 
        
       let conformDeletesuplierEmail=(id,bookeduserid,survedid)=>{
-        firestore().collection('tables').doc(id).update({
+        firestore().collection('tables').doc(item.id).update({
           ['survedby']: '',
           ['survedid']:'',
           
     
         })
-        firestore().collection('users').doc(bookeduserid).update({
+        firestore().collection('users').doc(item.data.bookeduserid).update({
           ['survedby']: '',
     
         })
     
-        firestore().collection('suppliers').doc(survedid).update({
+        firestore().collection('suppliers').doc(item.data.survedid).update({
           ['survingTable']:``,
         })
       }
@@ -99,7 +108,7 @@ const [users, setUsers] = useState([])
         Alert.alert('Warning','Are you sure to delete this supplier for this table!',[
 
           {text:"Yes",
-          onPress:()=>{conformDeletesuplierEmail(id,bookeduserid,survedid)},
+          onPress:()=>{conformDeletesuplierEmail()},
           style:'cancel'
           },
           {text:"No",
@@ -116,25 +125,30 @@ const [users, setUsers] = useState([])
 
 
       let handleUploadEmail=()=>{
+        // console.log( item.id,'id',item.data.bookeduserid ,'bokerid', item.data?.0, 'serveddid') 
+          
         if(supliersEmailselect){
         let reqData=supliersEmailselect?.split(' ')
-        // firestore().collection('tables').doc(id).update({
-        //     ['survedby']: reqData[0],
-        //     ['survedid']:reqData[1],
+        firestore().collection('tables').doc(item.id).update({
+            ['survedby']: reqData[1],
+            ['survedid']:reqData[0],
             
       
-        //   })
-        // firestore().collection('users').doc(bookeduserid).update({
-        //     ['survedby']: '',
+          })
+        firestore().collection('users').doc(item.data.bookeduserid).update({
+            ['survedby']: reqData[1],
       
-        //   })
+          })
       
-        //   firestore().collection('suppliers').doc(survedid).update({
-        //     ['survingTable']:``,
-        //   })
+          firestore().collection('suppliers').doc(reqData[0]).update({
+            ['survingTable']: `Table ${index+1}`,
+          })
 
-console.log(reqData)
-    
+          
+          setSupliersEmail(false)
+// console.log(reqData)
+alert('Editted sucessfully')
+
     
     }
     else {
@@ -194,26 +208,27 @@ console.log(reqData)
                         style={{ color:'black',
                       
                     
-                      width:'20%',
+                      width:120,
                       backgroundColor:'white',
                     
                       
                       }}
-                        onValueChange={(itemValue, itemIndex) =>{()=>
-                        setSupliersEmailselect(itemValue)}
+                        onValueChange={(itemValue, itemIndex) =>
+                        setSupliersEmailselect(itemValue)
                     }
                       >
                         {users.map((userData,index)=> (
                                <Picker.Item
                                key={index}
                                
-                               label={userData.data.name}  value={userData.id}  />)
+                               label={userData.data.name}  value={`${userData.id} ${userData.data.email}`}  />)
                 
                 
                         )}
                 
                 
-                  </Picker>:
+                  </Picker>
+                  :
 
                 <Text style={{color:'white', fontWeight:'700'}}>{item.data?.survedby?.split('@')[0]}</Text>}
                </View>
@@ -244,20 +259,20 @@ console.log(reqData)
         style={{ color:'black',
       
     
-      width:'20%',
+      width:120,
       backgroundColor:'white',
     
       
       }}
-        onValueChange={(itemValue, itemIndex) =>{()=>
-        setSupliersEmailselect(itemValue)}
+        onValueChange={(itemValue, itemIndex) =>
+        setSupliersEmailselect(itemValue)
     }
       >
         {users.map((userData,index)=> (
                <Picker.Item
                key={index}
                
-               label={userData.data.name}  value={userData.id}  />)
+               label={userData.data.name}  value={`${userData.id} ${userData.data.email}`}   />)
 
 
         )}
