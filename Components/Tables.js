@@ -1,4 +1,4 @@
-import { Alert, Appearance, Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Appearance, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import { Button } from 'react-native-elements'
@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderBookingInfo, SelectAdminSignIn, SelectUserSignIn } from './Redux/Redux_Slice';
 import firestore from '@react-native-firebase/firestore';
+import Footer from './Footer';
 
 
 const Tables = ({name, active, bookedby, survedby, id, index,bookerid, bookeremail,navigation,length}) => {
@@ -236,9 +237,13 @@ useEffect(()=>{
  
 
 return (
+  <SafeAreaView style={{
+    marginBottom:length===index+1? 200:0,
+  }}>
+  
     <View
     style={[styles.tables,
-      {marginBottom:length===index+1? 225:0,
+      {
       
         borderColor: phoneDarkModeCheck ?'red':'white'
       }
@@ -427,7 +432,16 @@ onPress={handleCancelBtn}
         
         ready to book</Text>}
      </View>
+
+
     </View>
+    {
+  index+1 === length &&
+
+     <View>
+<Footer/>
+     </View>}
+    </SafeAreaView>
   )
 }
 

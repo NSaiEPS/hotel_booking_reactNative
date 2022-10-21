@@ -6,6 +6,7 @@ import { SelectUserSignIn } from './Redux/Redux_Slice';
 import { useSelector } from 'react-redux';
 import email from 'react-native-email'
 import { serverTimestamp } from 'firebase/firestore';
+import { Button } from 'react-native-elements';
 
 
 
@@ -38,25 +39,16 @@ let hadleSubmitForm=()=>{
     
   })
    
-        // const to = ['tiaan@email.com', 'foo@bar.com'] // string or array of email addresses
-        // email(to, {
-        //     // Optional additional arguments
-        //     cc: ['bazzy@moo.com', 'doooo@daaa.com'], // string or array of email addresses
-        //     bcc: 'mee@mee.com', // string or array of email addresses
-        //     subject: 'Show how to use',
-        //     body: 'Some body right here',
-        //     checkCanOpen: false // Call Linking.canOpenURL prior to Linking.openURL
+      
 
-        // }).catch(console.error)
-
-        //  to = ['tiaan@email.com', 'foo@bar.com'] // string or array of email addresses
+        
         email('sainizameps@gmail.com', {
-            // Optional additional arguments
+           
            
             subject: `FeedBack form from '${selectUserSignIn?.email}' in Deviresidencies App`,
             
             body: input.feedBack,
-            checkCanOpen: false // Call Linking.canOpenURL prior to Linking.openURL
+            checkCanOpen: false 
 
         }).catch(console.error)
     
@@ -68,20 +60,19 @@ let hadleSubmitForm=()=>{
 
 
 }
-// After submitting check the email
-    // supliers email must contain "@deviresidenciessupliers.com" for the sake of ease 
+
     return (
       <View style={styles.body}>
+     
    
 
 
         <Modal
           visible={modelOpen}
           transparent
-        //   
-        
+   
           animationType='fade'
-        //   animationType='fade'
+        
           hardwareAccelerated
         >
           <View style={styles.centered_view}>
@@ -95,12 +86,7 @@ let hadleSubmitForm=()=>{
                
                <TextInput
                placeholder='Enter the name of the supplier'
-            //    onChangeText={(text)=>{
-            //     Setinput({
-            //         ...input,
-            //         name:text
-            //     })
-            //    }}
+            
                style={styles.supliersinput}
                value={input.name}
 
@@ -110,12 +96,7 @@ let hadleSubmitForm=()=>{
 
               <TextInput
                placeholder='Enter the email of the supplier'
-            //    onChangeText={(text)=>{
-            //     Setinput({
-            //         ...input,
-            //         email:text
-            //     })
-            //    }}
+          
                style={styles.supliersinput}
 
                value={input.email}
@@ -132,9 +113,9 @@ let hadleSubmitForm=()=>{
                }}
                style={styles.supliersinput}
 
-            //    secureTextEntry
+          
                value={input.feedBack}
-            //    onSubmitEditing={hadleSubmitForm}
+          
                />
 
 
@@ -149,6 +130,23 @@ let hadleSubmitForm=()=>{
                 <Text style={styles.text}>Submit</Text>
               </Pressable>
             </View>
+
+            <View style={styles.feedbackCancelBtn}>
+          <Button 
+          title='X'
+          buttonStyle={{
+            backgroundColor:'red',
+            width:50,
+            borderRadius:10
+
+          }}
+          onPress={()=>{
+
+            setModelOpenState(false)}
+
+        }
+          />
+        </View>
           </View>
         </Modal>
        
@@ -230,5 +228,10 @@ const styles = StyleSheet.create({
         width:270,
         paddingLeft:15,
         marginTop:5
+    },
+    feedbackCancelBtn:{
+      position:'absolute',
+      top:130,
+      right:15
     }
   });

@@ -86,6 +86,7 @@ let handleAddOrders=()=>{
             title='Go back'
             onPress={()=>{
              navigation.goBack()
+            //  navigation.replace('Home')
  
             }}
             />

@@ -78,7 +78,7 @@ const LoginScreen = ({navigation}) => {
 
 
 
-
+let [authChabged,setAuthChanged]=useState(false)
 
 
     const [input, setInput]=useState({
@@ -91,7 +91,8 @@ const LoginScreen = ({navigation}) => {
       e.preventDefault();
  
       auth().signInWithEmailAndPassword(input.email,input.password).then (userAuth=>{
-        navigation.replace("Home")
+        setAuthChanged(true)
+        // navigation.replace("Home")
        
       })
  .catch(error=>alert(error))
@@ -99,17 +100,10 @@ const LoginScreen = ({navigation}) => {
 
   
     useEffect(()=>{
-         
-      // setInput({
-      //   ...input,
-      //   email:'',
-      //   password:'',
-      //   passwordToggle:false
-
-      // })
+ 
 
       const subscriber= auth().onAuthStateChanged((authUser)=>{
-       //  console.log(authUser)
+        // console.log(authUser?.email, 'loginScreen')
         if(authUser){
            dispatch(
            userSignInAction({
@@ -131,6 +125,47 @@ const LoginScreen = ({navigation}) => {
       
       return subscriber;
        },[])
+
+
+       useEffect(()=>{
+ 
+
+        const subscriber= auth().onAuthStateChanged((authUser)=>{
+          // console.log(authUser?.email, 'loginScreen')
+          if(authUser){
+             dispatch(
+             userSignInAction({
+                 email:authUser?.email,
+                 name:authUser?.displayName
+     
+             })
+             )
+     
+            navigation.replace("Home")
+            if(authUser?.email==='deviresidencies@admin.com'){
+             dispatch(
+                 adminSignInAction(true)
+             )
+            }
+            else {
+              dispatch(
+                adminSignInAction(false)
+            )
+
+            }
+     
+          }
+         })
+        
+        return subscriber;
+         },[authChabged])
+
+
+
+
+
+
+
 
        
 

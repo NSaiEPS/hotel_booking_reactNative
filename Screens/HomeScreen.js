@@ -21,6 +21,7 @@ const HomeScreen = ({navigation}) => {
   // const [headerMoreInfo, setheaderMoreInfo] = useState(false)
   let dispatch=useDispatch()
   let selectUserSignIn=useSelector(SelectUserSignIn)
+  // console.log(selectUserSignIn, 'HomeScreen')
   const colorScheme = Appearance.getColorScheme();
 
 
@@ -373,7 +374,14 @@ borderColor:phoneDarkModeCheck ?'red':'white'
     >
       <FuaturedItems/>
       {/* <Tables  navigation={navigation} /> */}
+
+      <View>
+      <Text style={{color:'white',textAlign:'center',fontWeight:'600'}}>
+        We have {'24'} tables in which {'7'} tables are booked, remaining {'17'} tables are available for booking.
+      </Text>
+    </View>
       <ScrollView   ref={scrollRef} onScroll={handleScroll}>
+        
         {
           tables.map((item,index)=>
           {
@@ -400,10 +408,18 @@ bookeremail={item.data.bookeremail}  navigation={navigation} length={tables.leng
 
       </ScrollView>
 
+      {/* <View style={styles.homeScreenFooter}>
+
+      <Footer/>
+      </View> */}
+
+      
+
       
 
      
     </View>
+    {/* <Footer/> */}
     </SafeAreaView>
   )
 }

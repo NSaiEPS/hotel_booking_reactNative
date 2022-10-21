@@ -69,8 +69,8 @@ const {width, height} = Dimensions.get('window')
     
     }
 
-    let handleSendEmail=(email)=>{
-        email(`${email}`, {
+    let handleSendEmail=(emails)=>{
+        email(`${emails}`, {
           
            
             subject: `FeedBack from Admin of Devi Residencies`,
