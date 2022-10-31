@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Linking, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { Button } from 'react-native-elements'
 import FeedBack from './FeedBack'
@@ -44,9 +44,11 @@ const Footer = () => {
             
 <Icon
 
+onPress={() => Linking.openURL('https://github.com/NSaiEPS/hotel_booking_reactNative')}
 name={`${item}`}
 size={30} color="black" />:
 <EmailIcon
+onPress={() => Linking.openURL('https://github.com/NSaiEPS/hotel_booking_reactNative')}
 
 name={`${item}`}
 size={30} color="black" />}
@@ -133,6 +135,14 @@ size={30} color="black" />}
     </View>
   )
 }
+{/* <Pressable onPress={() => Linking.openURL('https://github.com/NSaiEPS/hotel_booking_react')}>
+{({ pressed }) =>
+  <Text style={{
+    textDecorationLine: 'underline',
+    color: pressed ? 'red' : 'blue'
+  }}>I'm a hyperlink!</Text>
+}
+</Pressable> */}
 
 export default Footer
 
