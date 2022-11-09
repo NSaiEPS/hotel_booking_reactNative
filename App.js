@@ -11,6 +11,9 @@ import AdminDashBoard from './Screens/AdminDashBoard';
 import { Provider } from 'react-redux';
 import { Store } from './Components/Redux/Store';
 import { Appearance } from 'react-native';
+// import SplashScreen from "react-native-splash-screen";
+import { useEffect } from 'react';
+
 
 enableScreens();
 
@@ -66,6 +69,9 @@ const globalScreenOptions={
 
 
 function App() {
+  // useEffect(() => {
+  //   SplashScreen.hide();
+  // }, []);
   return (
     <Provider  store={Store} >
     <NavigationContainer>

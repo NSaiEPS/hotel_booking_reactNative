@@ -238,7 +238,7 @@ useEffect(()=>{
 
 return (
   <SafeAreaView style={{
-    marginBottom:length===index+1? 200:0,
+    marginBottom:length===index+1? 250:0,
   }}>
   
     <View

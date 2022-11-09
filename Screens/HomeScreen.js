@@ -1,4 +1,4 @@
-import { Appearance, Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Appearance, Dimensions, Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 // import { Image } from 'react-native-elements'
 import FuaturedItems from '../Components/FuaturedItems'
@@ -307,6 +307,50 @@ const {width, height} = Dimensions.get('window')
 //   console.log(height);
 // }
 
+const [tablesInfo,setTablesInfo]=useState({
+  total:0,
+  booked:0,
+  unbooked:0
+})
+useEffect(()=>{
+  let unb=0;
+  let boked=0;
+  { Array.isArray(tables) && tables?.map((items)=>{
+    let ac=items.data.active;
+    if(!ac) {
+      unb+=1;
+      
+      
+  
+    }
+    else {
+      boked+=1
+      
+    }
+    // console.log(unb)
+    // setUnbooked(unb)
+    // dispatch(unbookedtable(
+    //   unb
+    // )
+  
+    // )
+  })}
+  setTablesInfo({
+    ...tablesInfo,
+    total:tables.length,
+    unbooked:unb,
+    booked:boked,
+  })
+
+
+},[tables])
+
+
+
+
+
+
+
 const scrollRef = useRef();
 const [scrolToTopCheck, setscrolToTopCheck]=useState(false)
 
@@ -346,9 +390,20 @@ if(userBlocked){
 }
 
 
+// const []
+
 
 return (
     <SafeAreaView>
+         {
+            Platform.OS !== "ios" &&
+         <StatusBar
+        translucent={false}
+        backgroundColor='#0e73c4'
+        barStyle={"dark-content"}
+        // barStyle={statusColor ? "light-content" : "dark-content"}
+      />}
+
       <View
       style={{
         borderColor: phoneDarkModeCheck ?'red':'white',
@@ -372,14 +427,15 @@ borderColor:phoneDarkModeCheck ?'red':'white'
     style={styles.homeScreen} 
     // onLayout={(layout)=> find_dimesions(layout)}
     >
-      <FuaturedItems/>
+      {/* <FuaturedItems/> */}
       {/* <Tables  navigation={navigation} /> */}
 
-      <View>
+      <View style={styles.tablesNumberInformation}>
       <Text style={{color:'white',textAlign:'center',fontWeight:'600'}}>
-        We have {'24'} tables in which {'7'} tables are booked, remaining {'17'} tables are available for booking.
+        We have {tables.length} tables in which {tablesInfo.booked} tables are booked, remaining {tablesInfo.unbooked} tables are available for booking.
       </Text>
     </View>
+
       <ScrollView   ref={scrollRef} onScroll={handleScroll}>
         
         {
@@ -440,7 +496,7 @@ const styles = StyleSheet.create({
     borderWidth:3,
     position:'absolute',
     
-    bottom:100,
+    bottom:125,
     right:10,
     backgroundColor:'#102041',
     elevation:3,
@@ -458,5 +514,15 @@ const styles = StyleSheet.create({
     backgroundColor:'red',
     color:'white',
    zIndex:4
+  },
+  tablesNumberInformation:{
+    width:'90%',
+    marginLeft:'auto',
+    marginRight:'auto',
+    marginTop:5,
+    paddingBottom:5,
+    borderRadius:10,
+    borderBottomColor:'white',
+    borderBottomWidth:1
   }
 })
