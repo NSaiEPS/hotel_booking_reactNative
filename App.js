@@ -10,9 +10,10 @@ import TablesInfoScreen from './Screens/TablesInfoScreen';
 import AdminDashBoard from './Screens/AdminDashBoard';
 import { Provider } from 'react-redux';
 import { Store } from './Components/Redux/Store';
-import { Appearance } from 'react-native';
+import { Appearance, View } from 'react-native';
 // import SplashScreen from "react-native-splash-screen";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Image } from 'react-native-elements';
 
 
 enableScreens();
@@ -69,9 +70,55 @@ const globalScreenOptions={
 
 
 function App() {
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, []);
+  let [splashScreen,SetsplashScreen]=useState(true)
+
+  useEffect(() => {
+    // SplashScreen.hide();
+    setTimeout(() => {
+      SetsplashScreen(false)
+      
+    },2000 );
+  }, []);
+
+  if(splashScreen){
+    return(
+    <View 
+    style={{
+      justifyContent:'center',
+      flex:1,
+      backgroundColor:"green"
+    }}
+    >
+      <View style={{
+        display:'flex',
+        justifyContent:'center',
+        width:'60%',
+        height:'50%',
+        // backgroundColor:'red',
+        alignSelf:'center',
+        
+      }}>
+    <Image 
+    source={{
+        uri:"https://img.freepik.com/premium-vector/initial-dr-letter-logo-with-script-typography-vector-template-creative-script-letter-dr-logo-design_616200-715.jpg"
+
+    }}
+    style={{
+      width:'100%',
+      height:250,
+      // width:'85%',
+      //     height:'85%',
+        
+        borderRadius:150,
+        resizeMode: 'contain'
+        
+        
+        
+    }}
+    />
+    </View>
+    </View>)
+  }
   return (
     <Provider  store={Store} >
     <NavigationContainer>
